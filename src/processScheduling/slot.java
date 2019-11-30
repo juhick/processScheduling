@@ -26,7 +26,7 @@ public class slot {
                 //获取不到资源就进入阻塞状态
                 //TODO 时间片中断
                 //计算运行时间，若仍需服务的时间不足一个时间片，则运行完就回收
-                int runTime = p.getEstimatesRunningTime() > timeSlice?timeSlice:p.getEstimatesRunningTime();
+                int runTime = Math.min(p.getEstimatesRunningTime(), timeSlice);
                 //进程执行
                 //run(p);
                 //执行一个时间片时间或执行完
