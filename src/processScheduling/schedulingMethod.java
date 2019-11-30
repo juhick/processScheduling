@@ -1,7 +1,11 @@
 package processScheduling;
 
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.Queue;
+
 class schedulingMethod {
-    PCB[] PSA_algorithm(PCB[] ready){//优先级
+    Queue<PCB> PSA_algorithm(PCB[] ready){//优先级
         for(int i=0;i<ready.length;i++) {
             for(int j=i;j<ready.length;j++) {
                 if(ready[i].getpPriority()>ready[j].getpPriority()) {
@@ -11,9 +15,16 @@ class schedulingMethod {
                 }
             }
         }
-        return ready;
+
+        Queue<PCB> readyQueue = new LinkedList<PCB>();
+
+        for (PCB pcb : ready) {
+            readyQueue.offer(pcb);
+        }
+
+        return readyQueue;
     }
-    PCB[] SJF_algorithm(PCB[] ready){//短作业
+    Queue<PCB> SJF_algorithm(PCB[] ready){//短作业
         for(int i=0;i<ready.length;i++) {
             for(int j=i;j<ready.length;j++) {
                 if(ready[i].getServiceTime()>ready[j].getServiceTime()) {
@@ -23,7 +34,13 @@ class schedulingMethod {
                 }
             }
         }
-        return ready;
+        Queue<PCB> readyQueue = new LinkedList<PCB>();
+
+        for (PCB pcb : ready) {
+            readyQueue.offer(pcb);
+        }
+
+        return readyQueue;
     }
     PCB HNNR_algorithm(PCB[] ready){//高响应比
         //计算响应比

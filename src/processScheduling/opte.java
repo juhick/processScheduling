@@ -1,4 +1,7 @@
 package processScheduling;
+
+import java.util.Queue;
+
 public class opte {
 
     public static void main(String[] args) {
@@ -12,15 +15,15 @@ public class opte {
         //初始化
         schedulingMethod pr=new schedulingMethod();
 		//优先级
-		ready=pr.PSA_algorithm(ready);
-		for(int i=0;i<ready.length;i++) {
-			System.out.println(ready[i].getpPriority());
+		Queue<PCB> readyQueue = pr.PSA_algorithm(ready);
+		while(!readyQueue.isEmpty()){
+			System.out.println(readyQueue.poll().getpPriority());
 		}
 //
 //		//短作业
-//		ready=pr.SJF_algorithm(ready);
-//		for(int i=0;i<ready.length;i++) {
-//			System.out.println(ready[i].getServiceTime());
+//		Queue<PCB> readyQueue=pr.SJF_algorithm(ready);
+//		while(!readyQueue.isEmpty()){
+//			System.out.println(readyQueue.poll().getServiceTime());
 //		}
 //        //hrrn
 //        PCB rea=new PCB();
