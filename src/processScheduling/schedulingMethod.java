@@ -27,7 +27,7 @@ class schedulingMethod {
     Queue<PCB> SJF_algorithm(PCB[] ready){//短作业
         for(int i=0;i<ready.length;i++) {
             for(int j=i;j<ready.length;j++) {
-                if(ready[i].getServiceTime()>ready[j].getServiceTime()) {
+                if(ready[i].getEstimatesRunningTime()>ready[j].getEstimatesRunningTime()) {
                     PCB mid=ready[i];
                     ready[i]=ready[j];
                     ready[j]=mid;
@@ -46,11 +46,12 @@ class schedulingMethod {
         //计算响应比
         for(int i=0;i<ready.length;i++) {
             int wt=ready[i].getWaitTime();
-            int sj=ready[i].getServiceTime();
+            int sj=ready[i].getEstimatesRunningTime();
             double hr=1+wt/sj;
             System.out.print(hr+" ");
             ready[i].setHrrn(hr);
         }
+        System.out.println();
         //找最大那个
         PCB re=new PCB();
         re=ready[0];

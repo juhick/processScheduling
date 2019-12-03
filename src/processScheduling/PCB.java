@@ -14,6 +14,22 @@ public class PCB {
     private double hrrn;//响应比
     private int pPriority;//优先级
     private int pState;//进程状态
+    private int runningStep;
+
+    public int getRunningStep() {
+        return runningStep;
+    }
+
+    public void setRunningStep(int runningStep) {
+        this.runningStep = runningStep;
+    }
+
+    /*  pState：
+                0：运行
+                1：就绪
+                2：阻塞
+                3：完成
+         */
     private PCB next;
 
     public int getWaitTime() {
@@ -31,10 +47,10 @@ public class PCB {
     public void setWaitTime(int id) {
         if((this.pId==id)) {
             if(this.waitTime>0) {
-                this.waitTime = this.waitTime-1;
+                this.waitTime = this.waitTime-2;
             }
         }else{
-            this.waitTime = this.waitTime+1;
+            this.waitTime = this.waitTime+2;
         }
     }
 

@@ -1,52 +1,70 @@
 package processScheduling;
 
+import java.util.Queue;
+
 public class semChange {
-    private int S1;								//互斥资源S1
-
-    public int getS1() {
-        return S1;
-    }
-
-    public void setS1(int s1) {
-        S1 = s1;
-    }
-
-    public int getS2() {
-        return S2;
-    }
-
-    public void setS2(int s2) {
-        S2 = s2;
-    }
-
-    private int S2;								//互斥资源S2
-    semChange() {
+    public int S1;											//互斥资源S1
+    public int S2;											//互斥资源S2
+    controlStructure cs;
+    public semChange() {
+        cs = new controlStructure();
         S1=1;
         S2=1;
     }
-    public synchronized void Wait(String a) {	//P操作
+
+    public boolean Wait(PCB pcb,String a, Message message) {					//P操作
         if(a.equals("S1")){
-            while(S1<=0) {}
-            S1--;
+            if(S1<=0) {
+                cs.Block(pcb, a, message);
+                S1--;
+                return false;
+            }
+            else {
+                S1--;
+                return true;
+            }
         }
         else if(a.equals("S2")) {
-            while(S2<=0) {}
-            S2--;
+            if(S2<=0) {
+                cs.Block(pcb, a, message);
+                S2--;
+                return false;
+            }
+            else {
+                S2--;
+                return true;
+            }
         }
         else {
             System.out.println("不存在该资源");
+            return false;
         }
     }
 
-    public synchronized void Signal(String a) {	//V操作
+    public boolean Signal(Queue<PCB> queue, String a, Message message) {		//V操作
         if(a.equals("S1")){
             S1++;
+            if(S1<=0) {
+                cs.Wakeup(queue, a, message);
+                return false;
+            }
+            else {
+                return true;
+            }
         }
         else if(a.equals("S2")) {
             S2++;
+            if(S2<=0) {
+                cs.Wakeup(queue, a, message);
+                return false;
+            }
+            else {
+                return true;
+            }
         }
         else {
             System.out.println("不存在该资源");
+            return false;
         }
     }
 }
