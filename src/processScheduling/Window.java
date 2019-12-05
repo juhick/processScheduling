@@ -422,13 +422,6 @@ public class Window extends JFrame{
                         }
 
                     }
-
-//                    System.out.println(PriorityMidTopMes);
-//                    System.out.println(PriorityMidMes);
-//                    System.out.println(PriorityMidBottomMes);
-//                    System.out.println(TimeMidTopMes);
-//                    System.out.println(TimeMidMes);
-//                    System.out.println(TimeMidBottomMes);
                 }
             }
 
